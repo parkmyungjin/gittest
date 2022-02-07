@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 방명록 정보 처리 SQL -->
+<mapper namespace="global.sesoc.web5.dao.MemberMapper">
+	<!-- 회원 가입 -->
+	<insert id="insert" parameterType="member">
+		insert into web5_member values 
+		(#{id}, #{password}, #{name}, #{phone}, #{address}, #{email})
+	</insert>
+	
+	<!-- 회원정보 1명 조회 -->
+	<select id="getMember" parameterType="string" resultType="member">
+		select * from web5_member where id = #{id}
+	</select>
+	
+	<update id="update" parameterType="member">
+		update web5_member
+		set name = #{name}, phone = #{phone}, address = #{address}, email = #{email}
+		<if test="password != null">
+		, password = #{password}
+		</if>
+		where id = #{id}	
+	</update>
+</mapper>
+
+
+
+
+

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 방명록 정보 처리 SQL -->
+<mapper namespace="global.sesoc.web5.dao.BoardMapper">
+
+<insert id="insert" parameterType="board">
+	insert
+	into
+		web5_board
+		(
+			boardnum
+			, id
+			, title
+			, contents
+		)
+	values
+		(
+			web5_board_seq.nextval
+			, #{id}
+			, #{title}
+			, #{contents}
+		)
+</insert>
+
+<!-- 게시글 목록 -->
+<select id="list" resultType="board">
+	select
+	 	boardnum
+	 	, title
+	 	, id
+	 	, hits
+	 	, to_char(inputdate, 'mm/dd') as inputdate <!-- to_char(inputdate, 'mm/dd')는 SQL에 없으므로 인식불가 -->
+	from
+	 	web5_board 
+	order by
+		boardnum 
+</select>
+
+<select id="select" parameterType="int" resultType="board"> 
+		select * from web5_Board where boardnum = #{num}
+</select>
+
+<update id="update" parameterType="board">
+		update web5_board
+		set title = #{title}, contents = #{contents}
+		where id = #{id} and boardnum = #{boardnum}
+</update>
+
+<delete id="delete" parameterType="board">
+		delete from web5_board where boardnum = #{boardnum} and id = #{id}
+</delete>
+
+<update id="updateHits" parameterType="int">
+		update web5_board
+		set	hits = hits + 1
+		where boardnum = #{boardnum}
+</update>
+</mapper>

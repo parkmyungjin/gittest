@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 방명록 정보 처리 SQL -->
+<mapper namespace="global.sesoc.web4.dao.GuestbookMapper">
+
+	<!-- 글 저장 -->
+	<insert id="insert" parameterType="guestbook">
+		insert 
+		into 
+			web4_guestbook 
+			(
+				num
+				, name
+				, password
+				, content
+			) 
+		values 
+			(
+				web4_guestbook_seq.nextval
+				, #{name}
+				, #{password}
+				, #{content}
+			)
+	</insert>
+
+	<!-- 모든 글 검색 -->
+	<select id="select" resultType="guestbook">
+		select * from web4_guestbook order by num desc
+	</select>
+
+	<!-- 글 삭제 -->
+	<delete id="delete" parameterType="guestbook">
+		delete from web4_guestbook where num = #{num} and password = #{password}
+	</delete>
+</mapper>
+
+
+
+
+
