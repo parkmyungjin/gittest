@@ -14,7 +14,7 @@
 </c:if>
 <ul>
 	<c:if test="${sessionScope.loginId == null}">
-		<li><a href="member/join">회원가입메롱~</a></li>
+		<li><a href="member/join">회원가입</a></li>
 		<li><a href="member/login">로그인</a></li>
 	</c:if>
 	<c:if test="${sessionScope.loginId != null}">
